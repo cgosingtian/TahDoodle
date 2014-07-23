@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="BNRDocument">
             <connections>
+                <outlet property="capsCheckBox" destination="at3-KF-G9I" id="6iX-SU-0tG"/>
                 <outlet property="itemTableView" destination="gHL-Zq-bzK" id="auT-Mz-Avd"/>
                 <outlet property="window" destination="xOd-HO-29H" id="JIz-fz-R2o"/>
             </connections>
@@ -92,14 +93,25 @@
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" id="21C-Xv-37o">
-                        <rect key="frame" x="85" y="8" width="103" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <rect key="frame" x="75" y="8" width="103" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <buttonCell key="cell" type="roundRect" title="Delete Selected" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Xea-X9-MVB">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="controlContent"/>
+                            <font key="font" metaFont="cellTitle"/>
                         </buttonCell>
                         <connections>
                             <action selector="deleteSelectedItem:" target="-2" id="nF3-E2-6fS"/>
+                        </connections>
+                    </button>
+                    <button id="at3-KF-G9I">
+                        <rect key="frame" x="184" y="9" width="53" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="check" title="Caps" bezelStyle="regularSquare" imagePosition="left" inset="2" id="iUq-Yy-Y7w">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="setAllCaps:" target="-2" id="RSi-ta-EQ6"/>
                         </connections>
                     </button>
                 </subviews>

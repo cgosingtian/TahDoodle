@@ -16,7 +16,12 @@
 {
     self = [super init];
     if (self) {
+        NSLog(@"ENTERED INIT");
+        NSLog(@"%d", [capsCheckBox state]);
         // Add your subclass-specific initialization here.
+        if ([capsCheckBox state] == NSOnState)
+            isAllCaps = true;
+        else isAllCaps = false;
     }
     return self;
 }
@@ -62,12 +67,25 @@
 
 #pragma mark - Actions
 
+- (NSString *)getBlockString
+{
+    NSString *(^newItemString)(void);
+    newItemString = ^(void)
+    {
+        if (isAllCaps)
+        {
+            return [NSString stringWithFormat:@"NEW ITEM"];
+        } else return [NSString stringWithFormat:@"new item"];
+    };
+    return newItemString();
+}
+
 - (IBAction)createNewItem:(id)sender
 {
     if (!todoItems)
         todoItems = [NSMutableArray array];
     
-    [todoItems addObject:@"New Item"];
+    [todoItems addObject:[self getBlockString]];
     
     [itemTableView reloadData]; // don't forget to refresh table views
     [self updateChangeCount:NSChangeDone]; // tells the document whether there are unsaved changes
@@ -78,6 +96,19 @@
     [todoItems removeObjectAtIndex:[itemTableView selectedRow]];
     [itemTableView reloadData];
     [self updateChangeCount:NSChangeDone];
+}
+
+- (IBAction)setAllCaps:(id)sender
+{
+    if (![capsCheckBox state])
+    {
+        isAllCaps = FALSE;
+    }
+    else
+    {
+        isAllCaps = TRUE;
+    }
+//    NSLog(@"%@",isAllCaps ? @"YES" : @"NO");
 }
 
 #pragma mark - Data Source Methods
