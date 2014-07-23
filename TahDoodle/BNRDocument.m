@@ -19,6 +19,8 @@
     return self;
 }
 
+#pragma mark - NSDocument Overrides
+
 - (NSString *)windowNibName
 {
     // Override returning the nib file name of the document
@@ -54,6 +56,38 @@
     NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
     @throw exception;
     return YES;
+}
+
+#pragma mark - Actions
+
+- (IBAction)createNewItem:(id)sender
+{
+    if (!todoItems)
+        todoItems = [NSMutableArray array];
+    
+    [todoItems addObject:@"New Item"];
+    
+    [itemTableView reloadData]; // don't forget to refresh table views
+    [self updateChangeCount:NSChangeDone]; // tells the document whether there are unsaved changes
+}
+
+#pragma mark - Data Source Methods
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
+{
+    return [todoItems count];
+}
+
+- (id)tableView:(NSTableView *)tableView objectValueForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    return [todoItems objectAtIndex:row];
+}
+
+- (void)tableView:(NSTableView *)tableView setObjectValue:(id)object forTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+    [todoItems replaceObjectAtIndex:row withObject:object];
+    //flag document as having unsaved changes
+    [self updateChangeCount:NSChangeDone];
 }
 
 @end
