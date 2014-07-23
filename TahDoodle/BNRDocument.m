@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 KLab Cyscorpions, Inc. All rights reserved.
 //
 
+// dev 1 col test
+
 #import "BNRDocument.h"
 
 @implementation BNRDocument
