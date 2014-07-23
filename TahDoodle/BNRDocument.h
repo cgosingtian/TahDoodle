@@ -14,5 +14,6 @@
     IBOutlet NSTableView *itemTableView;
 }
 - (IBAction)createNewItem:(id)sender;
+- (IBAction)deleteSelectedItem:(id)sender;
 
 @end

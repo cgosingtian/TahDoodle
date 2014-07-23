@@ -91,6 +91,17 @@
                             <action selector="createNewItem:" target="-2" id="LDY-9N-bcm"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" id="21C-Xv-37o">
+                        <rect key="frame" x="85" y="8" width="103" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="roundRect" title="Delete Selected" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Xea-X9-MVB">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="controlContent"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="deleteSelectedItem:" target="-2" id="nF3-E2-6fS"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <connections>

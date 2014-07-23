@@ -39,24 +39,24 @@
     return YES;
 }
 
-- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
-{
-    // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
-    // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return nil;
-}
+//- (NSData *)dataOfType:(NSString *)typeName error:(NSError **)outError
+//{
+//    // Insert code here to write your document to data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning nil.
+//    // You can also choose to override -fileWrapperOfType:error:, -writeToURL:ofType:error:, or -writeToURL:ofType:forSaveOperation:originalContentsURL:error: instead.
+//    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
+//    @throw exception;
+//    return nil;
+//}
 
-- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
-{
-    // Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
-    // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
-    // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
-    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
-    @throw exception;
-    return YES;
-}
+//- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError **)outError
+//{
+//    // Insert code here to read your document from the given data of the specified type. If outError != NULL, ensure that you create and set an appropriate error when returning NO.
+//    // You can also choose to override -readFromFileWrapper:ofType:error: or -readFromURL:ofType:error: instead.
+//    // If you override either of these, you should also override -isEntireFileLoaded to return NO if the contents are lazily loaded.
+//    NSException *exception = [NSException exceptionWithName:@"UnimplementedMethod" reason:[NSString stringWithFormat:@"%@ is unimplemented", NSStringFromSelector(_cmd)] userInfo:nil];
+//    @throw exception;
+//    return YES;
+//}
 
 #pragma mark - Actions
 
@@ -69,6 +69,13 @@
     
     [itemTableView reloadData]; // don't forget to refresh table views
     [self updateChangeCount:NSChangeDone]; // tells the document whether there are unsaved changes
+}
+
+- (IBAction)deleteSelectedItem:(id)sender
+{
+    [todoItems removeObjectAtIndex:[itemTableView selectedRow]];
+    [itemTableView reloadData];
+    [self updateChangeCount:NSChangeDone];
 }
 
 #pragma mark - Data Source Methods
@@ -88,6 +95,26 @@
     [todoItems replaceObjectAtIndex:row withObject:object];
     //flag document as having unsaved changes
     [self updateChangeCount:NSChangeDone];
+}
+
+#pragma mark - Save/Load; NSDocument Overrides
+
+- (NSData *)dataOfType:(NSString *)typeName error:(NSError *__autoreleasing *)outError
+{
+    if (!todoItems)
+    {
+        todoItems = [NSMutableArray array];
+    }
+    
+    //pack into NSData object
+    return [NSPropertyListSerialization dataWithPropertyList:todoItems format:NSPropertyListXMLFormat_v1_0 options:0 error:outError];
+}
+
+- (BOOL)readFromData:(NSData *)data ofType:(NSString *)typeName error:(NSError *__autoreleasing *)outError
+{
+    todoItems = [NSPropertyListSerialization propertyListWithData:data options:NSPropertyListMutableContainers format:NULL error:outError];
+    
+    return (todoItems != nil);
 }
 
 @end
