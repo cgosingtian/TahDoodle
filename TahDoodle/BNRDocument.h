@@ -12,8 +12,11 @@
 {
     NSMutableArray * todoItems;
     IBOutlet NSTableView *itemTableView;
+    IBOutlet NSButton *capsCheckBox;
+    bool isAllCaps;
 }
 - (IBAction)createNewItem:(id)sender;
 - (IBAction)deleteSelectedItem:(id)sender;
+- (IBAction)setAllCaps:(id)sender;
 
 @end
