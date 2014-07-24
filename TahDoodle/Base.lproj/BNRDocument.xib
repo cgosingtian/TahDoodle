@@ -106,12 +106,13 @@
                     <button id="at3-KF-G9I">
                         <rect key="frame" x="184" y="9" width="53" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="check" title="Caps" bezelStyle="regularSquare" imagePosition="left" inset="2" id="iUq-Yy-Y7w">
+                        <buttonCell key="cell" type="check" title="Caps" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="iUq-Yy-Y7w">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
                             <action selector="setAllCaps:" target="-2" id="RSi-ta-EQ6"/>
+                            <binding destination="DPk-S5-Y8C" name="value" keyPath="values" id="a8k-Hy-Mnn"/>
                         </connections>
                     </button>
                 </subviews>
@@ -120,5 +121,6 @@
                 <outlet property="delegate" destination="-2" id="0bl-1N-x8E"/>
             </connections>
         </window>
+        <userDefaultsController representsSharedInstance="YES" id="DPk-S5-Y8C"/>
     </objects>
 </document>

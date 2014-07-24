@@ -16,12 +16,17 @@
 {
     self = [super init];
     if (self) {
-        NSLog(@"ENTERED INIT");
-        NSLog(@"%d", [capsCheckBox state]);
         // Add your subclass-specific initialization here.
         if ([capsCheckBox state] == NSOnState)
+        {
+            NSLog(@"Setting isAllCaps to true");
             isAllCaps = true;
-        else isAllCaps = false;
+        }
+        else
+        {
+            NSLog(@"Setting isAllCaps to false");
+            isAllCaps = false;
+        }
     }
     return self;
 }
